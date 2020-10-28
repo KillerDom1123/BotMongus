@@ -18,3 +18,4 @@ Among Us Bot using Python and OpenCV
 - [ ] Know what other imposter's colour is
 - [ ] Keep a log of where the player has been and what tasks have been done
 - [ ] Ability to use chat
+- [ ] If imposter, only players if other player's can't see the kill
