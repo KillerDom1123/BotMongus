@@ -17,21 +17,30 @@ class BotMongus():
             print(name)
 
     def get_active_window_title(self):
+        """Get the current foreground window title
+
+        Should work across different OS types
+
+        Shamelessly 'borrowed' from:
+        https://askubuntu.com/questions/1199306/python-get-foreground-application-name-in-ubuntu-19-10
+        """
         root = subprocess.Popen(['xprop', '-root', '_NET_ACTIVE_WINDOW'], stdout=subprocess.PIPE)
         stdout, _ = root.communicate()
         m = re.search(b'^_NET_ACTIVE_WINDOW.* ([\w]+)$', stdout)
         if m is not None:
             window_id = m.group(1)
-            window = subprocess.Popen(['xprop', '-id', window_id,
-                                       'WM_NAME'],
+            window = subprocess.Popen(['xprop',
+                                       '-id',
+                                       window_id,
+                                       'WM_CLASS'],
                                       stdout=subprocess.PIPE)
+
             stdout, _ = window.communicate()
         else:
             return None
 
-        print(stdout)
-
-        match = re.match(b"WM_NAME\(\w+\) = (?P<name>.+)$", stdout)
+        match = re.match(b'WM_CLASS\(\w+\) = ".*", (?P<name>.+)$',
+                         stdout)
 
         if match is not None:
             return match.group("name").strip(b'"')
