@@ -3,7 +3,7 @@ Among Us Bot using Python and OpenCV
 
 **TODO:**
 
-- [ ] Check for window name and process if window is open
+- [x] Check for window name and process if window is open
 - [ ] Grab the screen of the game
 - [ ] Get current tasks
 - [ ] Get task place/direction
