@@ -37,7 +37,7 @@ class AmongUsBot():
                                               window_handle)
                 screen = future.result()
 
-            if times == 0:
+            if task_time == 0:
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     get_task_panel = executor.submit(self.get_tasks, screen)
                     tasks = get_task_panel.result()
