@@ -23,3 +23,5 @@ Among Us Bot using Python and OpenCV
 - [ ] If imposter, only kill players if other player's can't see
 - [ ] Know who the other fellow imposter is
 - [ ] Know the colour of the body reported
+- [ ] Be able to accuse players if dead body found with another player
+- [ ] Report when someone vents
