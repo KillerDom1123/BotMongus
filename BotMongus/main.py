@@ -41,8 +41,6 @@ class AmongUsBot():
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     get_task_panel = executor.submit(self.get_tasks, screen)
                     tasks = get_task_panel.result()
-                    PressKey(A)
-
 
                 task_time = 10
 
