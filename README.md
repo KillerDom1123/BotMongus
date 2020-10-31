@@ -7,7 +7,7 @@ Among Us Bot using Python and OpenCV
 - [x] Grab the screen of the game
 - [x] Get current tasks
 - [ ] Get task place/direction
-- [ ] Know where player is on the map
+- [x] Know where player is on the map (kinda)
 - [ ] See other players
 - [ ] Know if the player is an imposter/crewmate
 - [ ] Do the tasks
