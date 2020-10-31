@@ -11,12 +11,17 @@ Among Us Bot using Python and OpenCV
 - [ ] See other players
 - [ ] Know if the player is an imposter/crewmate
 - [ ] Do the tasks
-
+- [ ] Kill players if imposter
+- [ ] Report body
+- [ ] Add all available tasks
 
 **For Consideration:**
 - [ ] Know what player's colour is
 - [ ] Know what other imposter's colour is
 - [ ] Keep a log of where the player has been and what tasks have been done
 - [ ] Ability to use chat
-- [ ] If imposter, only players if other player's can't see the kill
-- [ ] Know who other fellow imposter is
+- [ ] If imposter, only kill players if other player's can't see
+- [ ] Know who the other fellow imposter is
+- [ ] Know the colour of the body reported
+- [ ] Be able to accuse players if dead body found with another player
+- [ ] Report when someone vents
