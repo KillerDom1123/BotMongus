@@ -1,12 +1,16 @@
-def foo(bar, baz):
-  print('hello {0}'.format(bar))
-  return 'foo' + baz
+import cv2
+import numpy as np
 
-from multiprocessing.pool import ThreadPool
-pool = ThreadPool(processes=1)
+img_rgb = cv2.imread('map.JPG')
+img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
+template = cv2.imread('icon.png',0)
+w, h = template.shape[::-1]
 
-async_result = pool.apply_async(foo, ('world', 'foo')) # tuple of args for foo
+res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
+threshold = 0.8
+loc = np.where( res >= threshold)
+print(loc)
+for pt in zip(*loc[::-1]):
+    cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,0,255), 2)
 
-# do some other stuff in the main process
-
-return_val = async_result.get()  # get the return value from your function.
+cv2.imwrite('res.png',img_rgb)
