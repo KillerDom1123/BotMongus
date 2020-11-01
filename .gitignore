@@ -130,3 +130,7 @@ dmypy.json
 
 # VSCode settings
 settings.json
+
+# Game settings
+config.json
+real_config.json
