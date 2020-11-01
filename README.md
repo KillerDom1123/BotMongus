@@ -9,7 +9,7 @@ Among Us Bot using Python and OpenCV
 - [ ] Get task place/direction
 - [x] Know where player is on the map (kinda)
 - [ ] See other players
-- [ ] Know if the player is an imposter/crewmate
+- [x] Know if the player is an imposter/crewmate
 - [ ] Do the tasks
 - [ ] Kill players if imposter
 - [ ] Report body

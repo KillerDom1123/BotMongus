@@ -10,6 +10,7 @@ from modules.get_location import get_location
 from modules.get_tasks import get_tasks
 from modules.get_window import get_window_dimensions, watch_window
 from modules.config import config
+from modules.get_role import get_role
 
 class AmongUsBot():
     """Class used to get the dimensions and that of the Among Us
@@ -32,34 +33,54 @@ class AmongUsBot():
 
         task_time = 0
         position_time = 0
+        imposter_time = 0
+
+        imposter = False
 
         print("Starting to watch game...")
 
         while True:
-            with concurrent.futures.ThreadPoolExecutor() as window_getter:
-                future = window_getter.submit(watch_window,
-                                              window_dimensions,
-                                              window_handle)
-                screen = future.result()
+            if position_time == 0:
+                with concurrent.futures.ThreadPoolExecutor() as window_getter:
+                    future = window_getter.submit(watch_window,
+                                                  window_dimensions,
+                                                  window_handle)
+                    screen = future.result()
 
-                if position_time == 0:
                     room = get_location(screen)
                     if room:
                         print(f'Player is in {room[0]}')
 
-                    position_time = 10
+                position_time = 10
 
-            if task_time == 0:
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    get_task_panel = executor.submit(get_tasks, screen,
-                                                     task_coords)
-                    tasks = get_task_panel.result()
-                    print(f'Player\'s current tasks: {", ".join(tasks)}')
+            if imposter_time == 0:
+                with concurrent.futures.ThreadPoolExecutor() as get_role_exec:
+                    future = get_role_exec.submit(get_role, screen,
+                                                  task_coords)
+                    imposter = future.result()
 
-                task_time = 10
+                    if imposter:
+                        print('Player is an imposter')
+                    else:
+                        print('Player is a crewmate')
+
+                imposter_time = 60
+
+            if not imposter:
+                if task_time == 0:
+                    with concurrent.futures.ThreadPoolExecutor() as get_task_exec:
+                        get_task_panel = get_task_exec.submit(get_tasks, screen,
+                                                            task_coords)
+                        tasks = get_task_panel.result()
+                        print(f'Player\'s current tasks: {", ".join(tasks)}')
+
+                    task_time = 10
+
+
 
             task_time -= 1
             position_time -= 1
+            imposter_time -= 1
 
             # print("Took {} miliseconds".format((time.time()-last_time)*1000))
             last_time = time.time()
