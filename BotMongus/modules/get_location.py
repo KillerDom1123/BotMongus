@@ -1,9 +1,10 @@
-from .utils import colour_filter
+from difflib import get_close_matches
 
+import cv2
 import numpy as np
 import pytesseract
-import cv2
-from difflib import get_close_matches
+
+from .utils import colour_filter
 
 white_upper = np.array([0, 0, 255])
 white_lower = np.array([0, 0, 0])

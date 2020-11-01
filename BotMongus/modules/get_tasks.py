@@ -1,27 +1,40 @@
-from .utils import colour_filter
-
-from difflib import get_close_matches
-import numpy as np
-import cv2
-import pytesseract
 import re
+from difflib import get_close_matches
 
+import cv2
+import numpy as np
+import pytesseract
+
+from .utils import colour_filter
 
 list_of_tasks = [
     'admin swipe card',
     'upper engine align engine output',
     'electrical divert power to communications',
+    'electrical divert power to security',
     'electrical calibrate distributor',
     'weapons clear asteroids',
-    'navigation download data'
+    'navigation download data',
+    'storage fuel engines',
+    'o2 clean o2 filter',
+    'electrical divert power to navigation',
+    'cafeteria empty garbage',
+    'navigation stabilize steering',
+    'shields prime shields',
+    'communications download data'
+]
+
+imposter_task = [
+    'sabotage and kill everyone',
+    'fake tasks'
 ]
 
 white_upper = np.array([0, 0, 255])
 white_lower = np.array([0, 0, 0])
 
 
-def get_tasks(screen):
-    x, y, w, h = (18, 108, 770, 210)
+def get_tasks(screen, task_coords):
+    x, y, w, h = task_coords
     task_panel = screen[y:y+h, x:x+w]
     task_panel = colour_filter(task_panel, white_upper, white_lower)
 
