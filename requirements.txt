@@ -1,5 +1,5 @@
 numpy==1.18.1
-pytesseract==0.3.2
+pytesseract==0.3.7
 opencv_python==4.2.0.32
 pywin32==228
 Pillow==8.0.1
